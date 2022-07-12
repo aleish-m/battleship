@@ -49,4 +49,12 @@ describe Ship do
     expect(@cruiser.sunk?).to eq(false)
   end
 
+  it "sinks when out of health" do
+    @cruiser.hit
+    @cruiser.hit
+    @cruiser.hit
+    expect(@cruiser.health).to eq(0)
+    expect(@cruiser.sunk?).to eq(true)
+  end
+
 end
