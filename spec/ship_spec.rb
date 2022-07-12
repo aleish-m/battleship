@@ -16,6 +16,13 @@ describe Ship do
 
   it "has a length" do
     expect(@cruiser.length).to eq(3)
+  end
+
+  it "has health" do
+    expect(@cruiser.health).to eq(3)
 
   end
+
+
+
 end
