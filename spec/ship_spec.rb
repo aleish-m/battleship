@@ -9,4 +9,8 @@ describe Ship do
   it "the ship exists" do
     expect(@cruiser).to be_instance_of(Ship)
   end
+
+  it "has a name" do
+    expect(@cruiser.name).to eq("Cruiser")
+  end
 end
