@@ -18,11 +18,19 @@ describe Ship do
     expect(@cruiser.length).to eq(3)
   end
 
-  it "has health" do
-    expect(@cruiser.health).to eq(3)
-
+  it "can have a different length" do
+    cruiser = Ship.new("Cruiser", 2)
+    expect(cruiser.health).to eq(2)
   end
 
+  it "has health" do
+    expect(@cruiser.health).to eq(3)
+  end
+
+  it "can have different health" do
+    cruiser = Ship.new("Cruiser", 10)
+    expect(cruiser.health).to eq(10)
+  end
 
 
 end
