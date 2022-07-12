@@ -37,6 +37,7 @@ describe Ship do
   end
 
   it "can be hit and lose health" do
+
     expect(@cruiser.health).to eq(3)
     @cruiser.hit
     expect(@cruiser.health).to eq(2)
