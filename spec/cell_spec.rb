@@ -37,7 +37,13 @@ describe Cell do
   it "has not been fired upon" do
     @cell.place_ship(@cruiser)
     expect(@cell.fired_upon?).to eq(false)
-
   end
 
+  it "has been fired upon" do
+    @cell.place_ship(@cruiser)
+    expect(@cell.ship.health).to eq(3)
+    @cell.fire_upon
+    expect(@cell.ship.health).to eq(2)
+    expect(@cell.fired_upon?).to eq(true)
+  end
 end
