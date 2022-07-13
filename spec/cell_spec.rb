@@ -34,4 +34,10 @@ describe Cell do
     expect(@cell.empty?).to eq(false)
   end
 
+  it "has not been fired upon" do
+    @cell.place_ship(@cruiser)
+    expect(@cell.fired_upon?).to eq(false)
+
+  end
+
 end
