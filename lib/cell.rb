@@ -12,7 +12,9 @@ class Cell
 
   end
 
-
+  def empty?
+    true
+  end
 
 
 end
