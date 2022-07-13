@@ -13,5 +13,9 @@ describe Cell do
     expect(@cell.coordinate).to eq("B4")
   end
 
+  it "it doesnt have a ship" do
+    
+    expect(@cell.ship).to eq(nil)
+  end
 
 end
