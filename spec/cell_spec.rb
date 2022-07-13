@@ -29,4 +29,9 @@ describe Cell do
     expect(@cell.ship).to eq(@cruiser)
   end
 
+  it "cell is no longer empty" do
+    @cell.place_ship(@cruiser)
+    expect(@cell.empty?).to eq(false)
+  end
+
 end
