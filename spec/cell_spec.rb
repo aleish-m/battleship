@@ -3,6 +3,7 @@ require './lib/cell'
 describe Cell do
   before :each do
     @cell = Cell.new("B4")
+    @cruiser = Ship.new("Cruiser", 3)
   end
 
   it "cell exists" do
@@ -21,6 +22,11 @@ describe Cell do
   it "is cell empty?" do
 
     expect(@cell.empty?).to eq(true)
+  end
+
+  it "can place a ship" do
+    @cell.place_ship(@cruiser)
+    expect(@cell.ship).to eq(@cruiser)
   end
 
 end
