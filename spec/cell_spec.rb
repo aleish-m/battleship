@@ -18,4 +18,9 @@ describe Cell do
     expect(@cell.ship).to eq(nil)
   end
 
+  it "is cell empty?" do
+
+    expect(@cell.empty?).to eq(true)
+  end
+
 end
