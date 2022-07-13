@@ -14,7 +14,7 @@ describe Cell do
   end
 
   it "it doesnt have a ship" do
-    
+
     expect(@cell.ship).to eq(nil)
   end
 
