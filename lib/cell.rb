@@ -2,11 +2,12 @@ require './lib/ship'
 
 class Cell
 
-  attr_reader :coordinate, :ship
+  attr_reader :coordinate, :ship, :render
 
   def initialize(coordinate)
     @coordinate = coordinate
     @ship = nil
+    @render = "."
   end
 
   def empty?
@@ -22,7 +23,11 @@ class Cell
   end
 
   def fire_upon
-    @ship.hit
+    if @ship != nil
+      @ship.hit
+    else
+      @render = "M"
+    end
   end
 
 end

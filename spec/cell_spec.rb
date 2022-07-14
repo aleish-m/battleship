@@ -48,8 +48,13 @@ describe Cell do
     expect(@cell.ship.health).to eq(2)
     expect(@cell.fired_upon?).to eq(true)
   end
+
   it "renders cells" do
     expect(@cell_1.render).to eq(".")
   end
 
+  it "changes what it renders" do
+      @cell_1.fire_upon
+      expect(@cell_1.render).to eq("M")
+  end
 end
