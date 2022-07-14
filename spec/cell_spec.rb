@@ -5,6 +5,7 @@ describe Cell do
     @cell = Cell.new("B4")
     @cruiser = Ship.new("Cruiser", 3)
     @cell_1 = Cell.new("B4")
+    @cell_2 = Cell.new("C3")
   end
 
   it "cell exists" do
@@ -46,6 +47,9 @@ describe Cell do
     @cell.fire_upon
     expect(@cell.ship.health).to eq(2)
     expect(@cell.fired_upon?).to eq(true)
+  end
+  it "renders cells" do
+    expect(@cell_1.render).to eq(".")
   end
 
 end
