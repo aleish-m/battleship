@@ -31,6 +31,11 @@ describe Cell do
     expect(@cell.ship).to eq(@cruiser)
   end
 
+  it "can place a differnt ship" do
+    @cell_2.place_ship(@cruiser)
+    expect(@cell_2.ship).to eq(@cruiser)
+  end
+
   it "cell is no longer empty" do
     @cell.place_ship(@cruiser)
     expect(@cell.empty?).to eq(false)
@@ -56,5 +61,10 @@ describe Cell do
   it "changes what it renders" do
       @cell_1.fire_upon
       expect(@cell_1.render).to eq("M")
+  end
+
+  it "renders with a ship placed" do
+      @cell_2.place_ship(@cruiser)
+      expect(@cell_2.render).to eq(".")
   end
 end
