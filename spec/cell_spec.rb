@@ -67,4 +67,9 @@ describe Cell do
       @cell_2.place_ship(@cruiser)
       expect(@cell_2.render).to eq(".")
   end
+
+  it "renders to show ship placed" do
+    @cell_2.place_ship(@cruiser)
+    expect(@cell_2.render(true)).to eq("S")
+  end
 end
