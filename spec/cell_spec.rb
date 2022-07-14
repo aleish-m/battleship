@@ -4,6 +4,7 @@ describe Cell do
   before :each do
     @cell = Cell.new("B4")
     @cruiser = Ship.new("Cruiser", 3)
+    @cell_1 = Cell.new("B4")
   end
 
   it "cell exists" do
@@ -46,4 +47,5 @@ describe Cell do
     expect(@cell.ship.health).to eq(2)
     expect(@cell.fired_upon?).to eq(true)
   end
+
 end

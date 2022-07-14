@@ -24,4 +24,5 @@ class Cell
   def fire_upon
     @ship.hit
   end
+
 end
