@@ -30,7 +30,9 @@ class Cell
   end
 
   def render(show_ship = false)
-    if @hit && @ship != nil
+    if @hit && @ship != nil && @ship.health == 0
+      "X"
+    elsif @hit && @ship != nil
       "H"
     elsif @hit
       "M"
