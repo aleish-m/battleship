@@ -26,4 +26,44 @@ class Board
   def valid_coordinate?(cell)
     @cells.has_key?(cell)
   end
+
+  def valid_placement?(boat, coordinates)
+    if coordinates.count == boat.length
+          row = coordinates.map do |coordinate|
+            coordinate[0]
+          end
+
+          num_row = row.map do |letter|
+            letter.ord
+          end
+
+          column = coordinates.map do |coordinate|
+            coordinate[1].to_i
+          end
+
+      if row.uniq.count == 1 &&
+          column.each_cons(2).all? do |num_1, num_2|
+            num_2 == num_1 +1
+          end
+          true
+
+      elsif column.uniq.count == 1 &&
+          num_row.each_cons(2).all? do |num_1, num_2|
+            num_2 == num_1 +1
+          end
+            true
+      else
+        false
+      end
+
+
+    else
+      false
+    end
+  end
+
+
+
+
+
 end
