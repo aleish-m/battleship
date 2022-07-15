@@ -87,5 +87,14 @@ end
     expect(@board.render).to eq("  1 2 3 4 \nA H . . . \nB . . . M \nC . . . . \nD . . . . \n")
   end
 
+  it "can render a board thats shows sunken ships" do
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    @board.place(@submarine, ["C1", "D1"])
+    @board.cells["A1"].fire_upon
+    @board.cells["B4"].fire_upon
+    @board.cells["D1"].fire_upon
+    @board.cells["C1"].fire_upon
+    expect(@board.render).to eq("  1 2 3 4 \nA H . . . \nB . . . M \nC X . . . \nD X . . . \n")
+  end
 
 end
