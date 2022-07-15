@@ -28,47 +28,59 @@ class Board
     @cells.has_key?(cell)
   end
 
+
   def valid_placement?(boat, coordinates)
     if coordinates.count == boat.length
-          row = coordinates.map do |coordinate|
-            coordinate[0]
-          end
+        row = coordinates.map do |coordinate|
+          coordinate[0]
+        end
 
-          num_row = row.map do |letter|
-            letter.ord
-          end
+        num_row = row.map do |letter|
+          letter.ord
+        end
 
-          column = coordinates.map do |coordinate|
-            coordinate[1].to_i
-          end
+        column = coordinates.map do |coordinate|
+          coordinate[1].to_i
+        end
 
-      if row.uniq.count == 1 &&
-          column.each_cons(2).all? do |num_1, num_2|
-            num_2 == num_1 +1
-          end
-          true
+        overlap = coordinates.map do |coordinate|
+          cells[coordinate].empty?
+        end
 
-      elsif column.uniq.count == 1 &&
-          num_row.each_cons(2).all? do |num_1, num_2|
-            num_2 == num_1 +1
-          end
+      if !overlap.include?(false)
+
+        if row.uniq.count == 1 &&
+            column.each_cons(2).all? do |num_1, num_2|
+              num_2 == num_1 +1
+            end
             true
+
+        elsif column.uniq.count == 1 &&
+            num_row.each_cons(2).all? do |num_1, num_2|
+              num_2 == num_1 +1
+            end
+              true
+        else
+          false
+        end
+
       else
         false
       end
 
-
     else
       false
     end
+
   end
 
 
-  def place(boat,coordinates)
-    coordinates.each do |coordinate|
-      @cells[coordinate].place_ship(boat)
+    def place(boat,coordinates)
+      coordinates.each do |coordinate|
+        @cells[coordinate].place_ship(boat)
+      end
     end
-  end
+
 
 
 end
