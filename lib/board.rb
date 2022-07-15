@@ -34,8 +34,8 @@ class Board
           end
 
           num_row = row.map do |letter|
-            letter.codepoints
-          end.flatten
+            letter.ord
+          end
 
           column = coordinates.map do |coordinate|
             coordinate[1].to_i
