@@ -75,4 +75,17 @@ end
     expect(@board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
   end
 
+  it "can render a board thats shows where ship is placed" do
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    expect(@board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+  end
+
+  it "can render a board thats shows hits and misses" do
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    @board.cells["A1"].fire_upon
+    @board.cells["B4"].fire_upon
+    expect(@board.render).to eq("  1 2 3 4 \nA H . . . \nB . . . M \nC . . . . \nD . . . . \n")
+  end
+
+
 end
