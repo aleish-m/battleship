@@ -70,4 +70,9 @@ end
     expect(@board.valid_placement?(@submarine, ["A4", "B4"])).to be(true)
   end
 
+  it "can render a board" do
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    expect(@board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+  end
+
 end
