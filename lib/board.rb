@@ -80,11 +80,11 @@ class Board
   end
 
 
-    def place(boat,coordinates)
-      coordinates.each do |coordinate|
-        @cells[coordinate].place_ship(boat)
-      end
+  def place(boat,coordinates)
+    coordinates.each do |coordinate|
+      @cells[coordinate].place_ship(boat)
     end
+  end
 
     def render(show = false)
       "  1 2 3 4 \n" +
