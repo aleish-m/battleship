@@ -10,7 +10,26 @@ class Game
   end
 
   def welcome
-    "Welcome to BATTLESHIP\nEnter p to play. Enter q to quit."
+    start = ""
+    puts "Welcome to BATTLESHIP\nEnter p to play. Enter q to quit."
+    until start == "p" || start =="q" do
+      print "> "
+      start = gets.chomp
+      puts "Please select valid option 'p' or 'q'."
+    end
+
+    if start = "p"
+      @player_1.place_ship(player_1.cruiser)
+      @player_1.place_ship(player_1.submarine)
+      puts "I have laid out my ships on the grid."
+      @player_2.board.render
+      ask_for_placement(@player_2.cruiser)
+      @player_2.board.render(true)
+      ask_for_placement(@player_2.submarine)
+      @player_2.board.render(true)
+    else
+      puts "Goodbye!!"
+    end
   end
 
   def play
@@ -18,26 +37,6 @@ class Game
     end
   end
 
-  def player_place_ship(boat, placement)
-    coordinates = placement.split(", ")
-
-    if coordinates.count == boat.length
-      if @player_2.board.valid_placement?(boat, coordinates) == true
-        @player_2.board.place(boat, coordinates)
-        true
-      else
-        false
-      end
-    else
-      false
-    end
-    # until @player_2.board.valid_placement?(boat, placement) == true
-    #   coordinates = placement.split(",")
-    #   require "pry"; binding.pry
-    #   if coordinates.count == boat.length
-    #     @player_2.board.valid_placement?(boat, coordinates)
-    #   end
-  end
 
   def ask_for_placement(boat)
     user_input = []
