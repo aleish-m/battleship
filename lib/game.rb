@@ -19,25 +19,36 @@ class Game
   end
 
   def player_place_ship(boat, placement)
+    coordinates = placement.split(", ")
 
-      coordinates = placement.split(",")
-
-      if coordinates.count == boat.length
-        if @player_2.board.valid_placement?(boat, coordinates)
-          @player_2.board.place(boat, coordinates)
-          true
-        else
-          false
-        end
+    if coordinates.count == boat.length
+      if @player_2.board.valid_placement?(boat, coordinates) == true
+        @player_2.board.place(boat, coordinates)
+        true
       else
         false
       end
+    else
+      false
+    end
     # until @player_2.board.valid_placement?(boat, placement) == true
     #   coordinates = placement.split(",")
     #   require "pry"; binding.pry
     #   if coordinates.count == boat.length
     #     @player_2.board.valid_placement?(boat, coordinates)
     #   end
+  end
+
+  def ask_for_placement(boat)
+    user_input = []
+    puts "Enter the squares for the #{boat.name} (#{boat.length} spaces.)"
+    until @player_2.board.valid_placement?(boat, user_input) do
+      print "> "
+      user_input = gets.chomp.split(" ")
+      next if @player_2.board.valid_placement?(boat, user_input)
+      puts "Those are invalid coordinates. Please try again:"
+    end
+    @player_2.board.place(boat, user_input)
   end
 
 end
