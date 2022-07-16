@@ -80,19 +80,19 @@ class Board
   end
 
 
-    def place(boat,coordinates)
-      coordinates.each do |coordinate|
-        @cells[coordinate].place_ship(boat)
-      end
+  def place(boat,coordinates)
+    coordinates.each do |coordinate|
+      @cells[coordinate].place_ship(boat)
     end
+  end
 
-    def render(show = false)
-      "  1 2 3 4 \n" +
-      "A #{@cells.fetch_values("A1", "A2", "A3", "A4").map {|cell| cell.render(show)}.join(" ")} \n" +
-      "B #{@cells.fetch_values("B1", "B2", "B3", "B4").map {|cell| cell.render(show)}.join(" ")} \n" +
-      "C #{@cells.fetch_values("C1", "C2", "C3", "C4").map {|cell| cell.render(show)}.join(" ")} \n" +
-      "D #{@cells.fetch_values("D1", "D2", "D3", "D4").map {|cell| cell.render(show)}.join(" ")} \n"
+  def render(show = false)
+    "  1 2 3 4 \n" +
+    "A #{@cells.fetch_values("A1", "A2", "A3", "A4").map {|cell| cell.render(show)}.join(" ")} \n" +
+    "B #{@cells.fetch_values("B1", "B2", "B3", "B4").map {|cell| cell.render(show)}.join(" ")} \n" +
+    "C #{@cells.fetch_values("C1", "C2", "C3", "C4").map {|cell| cell.render(show)}.join(" ")} \n" +
+    "D #{@cells.fetch_values("D1", "D2", "D3", "D4").map {|cell| cell.render(show)}.join(" ")} \n"
 
-    end
+  end
 
 end
