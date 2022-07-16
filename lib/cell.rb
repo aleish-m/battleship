@@ -36,7 +36,7 @@ class Cell
       "H"
     elsif @hit
       "M"
-    elsif show_ship == true
+    elsif show_ship == true && @ship != nil
       "S"
     else
       "."
