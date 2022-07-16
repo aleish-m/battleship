@@ -30,36 +30,41 @@ class Board
 
 
   def valid_placement?(boat, coordinates)
+
+    row = coordinates.map do |coordinate|
+      coordinate[0]
+    end
+
+    num_row = row.map do |letter|
+      letter.ord
+    end
+
+    column = coordinates.map do |coordinate|
+      coordinate[1].to_i
+    end
+
+    overlap = coordinates.map do |coordinate|
+      cells[coordinate].empty?
+    end
+
     if coordinates.count == boat.length
-        row = coordinates.map do |coordinate|
-          coordinate[0]
-        end
 
-        num_row = row.map do |letter|
-          letter.ord
-        end
-
-        column = coordinates.map do |coordinate|
-          coordinate[1].to_i
-        end
-
-        overlap = coordinates.map do |coordinate|
-          cells[coordinate].empty?
-        end
-
-      if !overlap.include?(false)
+      if overlap.all?
 
         if row.uniq.count == 1 &&
-            column.each_cons(2).all? do |num_1, num_2|
-              num_2 == num_1 +1
-            end
-            true
+          column.each_cons(2).all? do |num_1, num_2|
+            num_2 == num_1 +1
+          end
+
+          true
 
         elsif column.uniq.count == 1 &&
-            num_row.each_cons(2).all? do |num_1, num_2|
-              num_2 == num_1 +1
-            end
-              true
+          num_row.each_cons(2).all? do |num_1, num_2|
+            num_2 == num_1 +1
+          end
+
+          true
+
         else
           false
         end
@@ -81,6 +86,13 @@ class Board
       end
     end
 
+    def render(show = false)
+      "  1 2 3 4 \n" +
+      "A #{@cells.fetch_values("A1", "A2", "A3", "A4").map {|cell| cell.render(show)}.join(" ")} \n" +
+      "B #{@cells.fetch_values("B1", "B2", "B3", "B4").map {|cell| cell.render(show)}.join(" ")} \n" +
+      "C #{@cells.fetch_values("C1", "C2", "C3", "C4").map {|cell| cell.render(show)}.join(" ")} \n" +
+      "D #{@cells.fetch_values("D1", "D2", "D3", "D4").map {|cell| cell.render(show)}.join(" ")} \n"
 
+    end
 
 end
