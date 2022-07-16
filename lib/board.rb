@@ -43,7 +43,7 @@ class Board
     end
 
     overlap = coordinates.map do |coordinate|
-      cells[coordinate].empty?
+      @cells[coordinate].empty?
     end
 
     if coordinates.count == boat.length
