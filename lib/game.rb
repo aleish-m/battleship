@@ -2,6 +2,8 @@ require './lib/player'
 
 class Game
 
+  attr_reader :player_1, :player_2
+
   def initialize
     @player_1 = Computer.new
     @player_2 = Player.new
@@ -16,7 +18,26 @@ class Game
     end
   end
 
+  def player_place_ship(boat, placement)
 
+      coordinates = placement.split(",")
 
+      if coordinates.count == boat.length
+        if @player_2.board.valid_placement?(boat, coordinates)
+          @player_2.board.place(boat, coordinates)
+          true
+        else
+          false
+        end
+      else
+        false
+      end
+    # until @player_2.board.valid_placement?(boat, placement) == true
+    #   coordinates = placement.split(",")
+    #   require "pry"; binding.pry
+    #   if coordinates.count == boat.length
+    #     @player_2.board.valid_placement?(boat, coordinates)
+    #   end
+  end
 
 end
