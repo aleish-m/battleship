@@ -92,7 +92,5 @@ class Board
       "B #{@cells.fetch_values("B1", "B2", "B3", "B4").map {|cell| cell.render(show)}.join(" ")} \n" +
       "C #{@cells.fetch_values("C1", "C2", "C3", "C4").map {|cell| cell.render(show)}.join(" ")} \n" +
       "D #{@cells.fetch_values("D1", "D2", "D3", "D4").map {|cell| cell.render(show)}.join(" ")} \n"
-
     end
-
 end
