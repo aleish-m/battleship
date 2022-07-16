@@ -19,4 +19,8 @@ describe Player do
     expect(@player_2.board == @player_1.board).to be(false)
   end
 
+  it "is alive at start of game" do
+    expect(@player_2.dead?).to be(false)
+  end
+
 end

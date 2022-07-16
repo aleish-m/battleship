@@ -13,4 +13,8 @@ it "has a board to play on" do
   expect(@player_1.board).to be_instance_of(Board)
 end
 
+it "is alive at start of game" do
+  expect(@player_1.dead?).to be(false)
+end
+
 end

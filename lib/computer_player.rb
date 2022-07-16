@@ -11,4 +11,8 @@ class Computer
     @submarine = Ship.new("Submarine", 2)
   end
 
+def dead?
+  @cruiser.health == 0 && @submarine.health == 0
+end
+
 end
