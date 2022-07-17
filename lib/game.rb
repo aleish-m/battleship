@@ -18,23 +18,40 @@ class Game
       puts "Please select valid option 'p' or 'q'."
     end
 
-    if start = "p"
-      @player_1.place_ship(player_1.cruiser)
-      @player_1.place_ship(player_1.submarine)
-      puts "I have laid out my ships on the grid."
-      @player_2.board.render
-      ask_for_placement(@player_2.cruiser)
-      @player_2.board.render(true)
-      ask_for_placement(@player_2.submarine)
-      @player_2.board.render(true)
-    else
-      puts "Goodbye!!"
-    end
+    # if start = "p"
+    #   @player_1.place_ship(player_1.cruiser)
+    #   @player_1.place_ship(player_1.submarine)
+    #   puts "I have laid out my ships on the grid."
+    #   @player_2.board.render
+    #   ask_for_placement(@player_2.cruiser)
+    #   @player_2.board.render(true)
+    #   ask_for_placement(@player_2.submarine)
+    #   @player_2.board.render(true)
+    # else
+    #   puts "Goodbye!!"
+    # end
+  end
+
+  def setup
+    @player_1.place_ship(player_1.cruiser)
+    @player_1.place_ship(player_1.submarine)
+    puts "I have laid out my ships on the grid."
+    puts @player_2.board.render
+    ask_for_placement(@player_2.cruiser)
+    puts @player_2.board.render(true)
+    ask_for_placement(@player_2.submarine)
+    puts @player_2.board.render(true)
   end
 
   def play
-    until player_1.dead? || player_2.dead?
-    end
+    # until player_1.dead? || player_2.dead?
+      puts ('=' * 10) + "COMPUTER BOARD" + ('=' * 10)
+      puts @player_1.board.render
+      puts " "
+      puts ('=' * 10) + "PLAYER BOARD" + ('=' * 10)
+      puts @player_2.board.render(true)
+
+    # end
   end
 
 
@@ -43,7 +60,7 @@ class Game
     puts "Enter the squares for the #{boat.name} (#{boat.length} spaces.)"
     until @player_2.board.valid_placement?(boat, user_input) do
       print "> "
-      user_input = gets.chomp.split(" ")
+      user_input = gets.chomp.upcase.split(" ")
       next if @player_2.board.valid_placement?(boat, user_input)
       puts "Those are invalid coordinates. Please try again:"
     end
