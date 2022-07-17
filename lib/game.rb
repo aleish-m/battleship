@@ -57,7 +57,9 @@ class Game
 
   def ask_for_placement(boat)
     user_input = []
-    puts "Enter the squares for the #{boat.name} (#{boat.length} spaces.)"
+    puts "Enter the squares for the #{boat.name} (#{boat.length} spaces.)
+    Squares must be entered sequentially. Ships can only be Horizontal or Vertical.
+    (Example Input: 'A1 A2 A3' or 'B2 C2 D2')"
     until @player_2.board.valid_placement?(boat, user_input) do
       print "> "
       user_input = gets.chomp.upcase.split(" ")
