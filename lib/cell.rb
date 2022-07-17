@@ -2,7 +2,7 @@ require './lib/ship'
 
 class Cell
 
-  attr_reader :coordinate, :ship
+  attr_reader :coordinate, :ship, :hit
 
   def initialize(coordinate)
     @coordinate = coordinate
@@ -23,10 +23,10 @@ class Cell
   end
 
   def fire_upon
-    @hit = true
-    if @ship != nil
+    if @hit == false && @ship != nil
       @ship.hit
     end
+    @hit = true
   end
 
   def render(show_ship = false)

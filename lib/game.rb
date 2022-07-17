@@ -12,13 +12,13 @@ class Game
   def welcome
     start = ""
     puts "Welcome to BATTLESHIP\nEnter p to play. Enter q to quit."
-    until start == "p" || start =="q" do
+    until start == "p" || start == "q" do
       print "> "
-      start = gets.chomp
+      start = gets.chomp.downcase
       puts "Please select valid option 'p' or 'q'."
     end
 
-    # if start = "p"
+    # if start == "p"
     #   @player_1.place_ship(player_1.cruiser)
     #   @player_1.place_ship(player_1.submarine)
     #   puts "I have laid out my ships on the grid."
@@ -44,14 +44,31 @@ class Game
   end
 
   def play
-    # until player_1.dead? || player_2.dead?
+    puts ('=' * 10) + "COMPUTER BOARD" + ('=' * 10)
+    puts @player_1.board.render
+    puts " "
+    puts ('=' * 10) + "PLAYER BOARD" + ('=' * 10)
+    puts @player_2.board.render(true)
+
+    until player_1.dead? || player_2.dead?
+
+      # @player_1.board[@player_2.turn].fire_upon
+      # puts ('=' * 10) + "COMPUTER BOARD" + ('=' * 10)
+      # puts @player_1.board.render
+      # puts " "
+      # puts ('=' * 10) + "PLAYER BOARD" + ('=' * 10)
+      # puts @player_2.board.render(true)
+      # @player_1.dead?
+
+      puts "I am firing on you"
+      @player_2.board.cells[comp_turn].fire_upon
       puts ('=' * 10) + "COMPUTER BOARD" + ('=' * 10)
       puts @player_1.board.render
       puts " "
       puts ('=' * 10) + "PLAYER BOARD" + ('=' * 10)
       puts @player_2.board.render(true)
-
-    # end
+      @player_2.dead?
+    end
   end
 
 
@@ -67,6 +84,22 @@ class Game
       puts "Those are invalid coordinates. Please try again:"
     end
     @player_2.board.place(boat, user_input)
+  end
+
+
+  def comp_valid_turn?(coordinate)
+    @player_2.board.cells[coordinate].hit == false
+  end
+
+  def comp_turn
+    coordinate = " "
+    loop do
+      coordinate = @player_1.board.cells.keys.shuffle[0]
+      if comp_valid_turn?(coordinate)
+        break
+      end
+    end
+    coordinate
   end
 
 end
