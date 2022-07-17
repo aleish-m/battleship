@@ -21,7 +21,6 @@ class Computer
       placement = @board.cells.keys.shuffle[0..(boat.length - 1)]
       @board.valid_placement?(boat, placement)
     end
-    # require "pry"; binding.pry
     @board.place(boat, placement)
   end
 
