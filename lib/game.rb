@@ -14,7 +14,7 @@ class Game
     puts "Welcome to BATTLESHIP\nEnter p to play. Enter q to quit."
     until start == "p" || start == "q" do
       print "> "
-      start = gets.chomp.downcase
+      start = gets.chomp
       puts "Please select valid option 'p' or 'q'."
     end
 
@@ -52,13 +52,13 @@ class Game
 
     until player_1.dead? || player_2.dead?
 
-      # @player_1.board[@player_2.turn].fire_upon
-      # puts ('=' * 10) + "COMPUTER BOARD" + ('=' * 10)
-      # puts @player_1.board.render
-      # puts " "
-      # puts ('=' * 10) + "PLAYER BOARD" + ('=' * 10)
-      # puts @player_2.board.render(true)
-      # @player_1.dead?
+      @player_1.board.cells[player_turn].fire_upon
+      puts ('=' * 10) + "COMPUTER BOARD" + ('=' * 10)
+      puts @player_1.board.render
+      puts " "
+      puts ('=' * 10) + "PLAYER BOARD" + ('=' * 10)
+      puts @player_2.board.render(true)
+      @player_1.dead?
 
       puts "I am firing on you"
       @player_2.board.cells[comp_turn].fire_upon
@@ -96,6 +96,27 @@ class Game
     loop do
       coordinate = @player_1.board.cells.keys.shuffle[0]
       if comp_valid_turn?(coordinate)
+        break
+      end
+    end
+    coordinate
+  end
+
+  def player_valid_turn?(coordinate)
+    if @player_2.board.valid_coordinate?(coordinate)
+      @player_1.board.cells[coordinate].hit == false
+    else
+      puts "You can't do that, can't you see it's not an option?????"
+    end
+  end
+
+  def player_turn
+    coordinate = ""
+    loop do
+      puts "Please enter a valid coordinate you would like to hit"
+      print "> "
+      coordinate = gets.chomp.upcase
+      if player_valid_turn?(coordinate)
         break
       end
     end
