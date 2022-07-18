@@ -59,8 +59,8 @@ class Game
       puts ('=' * 10) + "PLAYER BOARD" + ('=' * 10)
       puts @player_2.board.render(true)
       @player_1.dead?
+      # puts "I am firing on #{player_turn} "
 
-      puts "I am firing on you"
       @player_2.board.cells[comp_turn].fire_upon
       puts ('=' * 10) + "COMPUTER BOARD" + ('=' * 10)
       puts @player_1.board.render
@@ -69,6 +69,13 @@ class Game
       puts @player_2.board.render(true)
       @player_2.dead?
     end
+      if @player_2.dead?
+        puts ('=' * 40)
+        puts "You suck"
+      else @player_1.dead?
+        puts ('=' * 40)
+        puts "You WON!!!"
+      end
   end
 
 
@@ -99,6 +106,7 @@ class Game
         break
       end
     end
+    puts "Computer shot #{coordinate}"
     coordinate
   end
 
@@ -120,6 +128,7 @@ class Game
         break
       end
     end
+    puts "You shot #{coordinate}"
     coordinate
   end
 
