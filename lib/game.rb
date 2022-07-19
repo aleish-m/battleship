@@ -13,7 +13,6 @@ class Game
   end
 
   def welcome
-    # start = ""
     puts "Welcome to BATTLESHIP\nEnter p to play. Enter q to quit."
     until @start == "p" || @start == "q" do
       print "> "
@@ -117,15 +116,13 @@ class Game
       puts "Please enter a valid coordinate you would like to hit"
     end
     puts " "
-    # puts "You shot #{coordinate}"
-    # player_hit_message(coordinate)
     @player_hit_coordinate = coordinate
     coordinate
   end
 
   def player_hit_message(coordinate)
     if @player_1.board.cells[coordinate].render == "X"
-      puts "Your shot on #{coordinate} sunk my ship!!!!!!"
+      puts "Your shot on #{coordinate} sunk my #{@player_1.board.cells[coordinate].ship.name}!!!!!!"
     elsif @player_1.board.cells[coordinate].render == "H"
       puts "Your shot on #{coordinate} was a hit"
     elsif @player_1.board.cells[coordinate].render == "M"
@@ -135,7 +132,7 @@ class Game
 
   def computer_hit_message(coordinate)
     if @player_2.board.cells[coordinate].render == "X"
-      puts "Computer shot on #{coordinate} sunk your ship!!!!!!!"
+      puts "Computer shot on #{coordinate} sunk your #{@player_2.board.cells[coordinate].ship.name}!!!!!!!"
     elsif @player_2.board.cells[coordinate].render == "H"
       puts "Computer shot on #{coordinate} was a hit"
     elsif @player_2.board.cells[coordinate].render == "M"
