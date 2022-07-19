@@ -6,21 +6,32 @@ describe Player do
     @player_2 = Player.new
   end
 
-  it "has computer player that exists" do
+  it "Player has computer player that exists" do
     expect(@player_2).to be_instance_of(Player)
   end
 
-  it "has a board to play on" do
+  it "Player has a board to play on" do
     expect(@player_2.board).to be_instance_of(Board)
   end
 
-  it "has a differnt board then computer player" do
+  it "Player has a different board then computer player" do
     expect(@player_1.board).to be_instance_of(Board)
     expect(@player_2.board == @player_1.board).to be(false)
   end
 
-  it "is alive at start of game" do
+  it "Player is alive at start of game" do
     expect(@player_2.dead?).to be(false)
+  end
+
+  it "Player dies if both ships are sunk" do
+    @player_2.cruiser.hit
+    @player_2.cruiser.hit
+    @player_2.cruiser.hit
+    expect(@player_2.dead?).to be(false)
+
+    @player_2.submarine.hit
+    @player_2.submarine.hit
+    expect(@player_2.dead?).to be(true)
   end
 
 end
