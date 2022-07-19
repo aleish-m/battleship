@@ -8,6 +8,8 @@ class Game
     @player_1 = Computer.new
     @player_2 = Player.new
     @start = ""
+    @player_hit_coordinate = ""
+    @computer_hit_coordinate = ""
   end
 
   def welcome
@@ -43,14 +45,11 @@ class Game
     until player_1.dead? || player_2.dead?
 
       @player_1.board.cells[player_turn].fire_upon
-      # puts ('=' * 10) + "COMPUTER BOARD" + ('=' * 10)
-      # puts @player_1.board.render
-      # puts " "
-      # puts ('=' * 10) + "PLAYER BOARD" + ('=' * 10)
-      # puts @player_2.board.render(true)
+      player_hit_message(@player_hit_coordinate)
       @player_1.dead?
 
       @player_2.board.cells[comp_turn].fire_upon
+      computer_hit_message(@computer_hit_coordinate)
       puts ('=' * 10) + "COMPUTER BOARD" + ('=' * 10)
       puts @player_1.board.render
       puts " "
@@ -96,7 +95,7 @@ class Game
       end
     end
     puts " "
-    puts "Computer shot #{coordinate}"
+    @computer_hit_coordinate = coordinate
     coordinate
   end
 
@@ -118,8 +117,30 @@ class Game
       puts "Please enter a valid coordinate you would like to hit"
     end
     puts " "
-    puts "You shot #{coordinate}"
+    # puts "You shot #{coordinate}"
+    # player_hit_message(coordinate)
+    @player_hit_coordinate = coordinate
     coordinate
+  end
+
+  def player_hit_message(coordinate)
+    if @player_1.board.cells[coordinate].render == "X"
+      puts "Your shot on #{coordinate} sunk my ship!!!!!!"
+    elsif @player_1.board.cells[coordinate].render == "H"
+      puts "Your shot on #{coordinate} was a hit"
+    elsif @player_1.board.cells[coordinate].render == "M"
+      puts "Your shot on #{coordinate} was a miss"
+    end
+  end
+
+  def computer_hit_message(coordinate)
+    if @player_2.board.cells[coordinate].render == "X"
+      puts "Computer shot on #{coordinate} sunk your ship!!!!!!!"
+    elsif @player_2.board.cells[coordinate].render == "H"
+      puts "Computer shot on #{coordinate} was a hit"
+    elsif @player_2.board.cells[coordinate].render == "M"
+      puts "Computer shot on #{coordinate} was a miss"
+    end
   end
 
 end
