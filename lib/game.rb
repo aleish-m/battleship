@@ -2,19 +2,21 @@ require './lib/player'
 
 class Game
 
-  attr_reader :player_1, :player_2
+  attr_reader :player_1, :player_2, :start
 
   def initialize
     @player_1 = Computer.new
     @player_2 = Player.new
+    @start = ""
   end
 
   def welcome
-    start = ""
+    # start = ""
     puts "Welcome to BATTLESHIP\nEnter p to play. Enter q to quit."
-    until start == "p" || start == "q" do
+    until @start == "p" || @start == "q" do
       print "> "
-      start = gets.chomp
+      @start = gets.chomp.downcase
+      next if @start == "p" || @start == "q"
       puts "Please select valid option 'p' or 'q'."
     end
 
@@ -41,11 +43,11 @@ class Game
     until player_1.dead? || player_2.dead?
 
       @player_1.board.cells[player_turn].fire_upon
-      puts ('=' * 10) + "COMPUTER BOARD" + ('=' * 10)
-      puts @player_1.board.render
-      puts " "
-      puts ('=' * 10) + "PLAYER BOARD" + ('=' * 10)
-      puts @player_2.board.render(true)
+      # puts ('=' * 10) + "COMPUTER BOARD" + ('=' * 10)
+      # puts @player_1.board.render
+      # puts " "
+      # puts ('=' * 10) + "PLAYER BOARD" + ('=' * 10)
+      # puts @player_2.board.render(true)
       @player_1.dead?
 
       @player_2.board.cells[comp_turn].fire_upon
@@ -93,6 +95,7 @@ class Game
         break
       end
     end
+    puts " "
     puts "Computer shot #{coordinate}"
     coordinate
   end
@@ -100,21 +103,21 @@ class Game
   def player_valid_turn?(coordinate)
     if @player_2.board.valid_coordinate?(coordinate)
       @player_1.board.cells[coordinate].hit == false
-    else
-      puts "Please enter a valid coordinate you would like to hit"
     end
   end
 
   def player_turn
     coordinate = ""
+    puts "Enter the coordinate for your shot:"
     loop do
-      puts "Please enter a valid coordinate you would like to hit"
       print "> "
       coordinate = gets.chomp.upcase
       if player_valid_turn?(coordinate)
         break
       end
+      puts "Please enter a valid coordinate you would like to hit"
     end
+    puts " "
     puts "You shot #{coordinate}"
     coordinate
   end
