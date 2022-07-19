@@ -34,12 +34,16 @@ class Game
     puts @player_2.board.render(true)
   end
 
-  def play
+  def render_boards
     puts ('=' * 10) + "COMPUTER BOARD" + ('=' * 10)
     puts @player_1.board.render
     puts " "
     puts ('=' * 10) + "PLAYER BOARD" + ('=' * 10)
     puts @player_2.board.render(true)
+  end
+
+  def play
+    render_boards
 
     until player_1.dead? || player_2.dead?
 
@@ -49,11 +53,7 @@ class Game
 
       @player_2.board.cells[comp_turn].fire_upon
       computer_hit_message(@computer_hit_coordinate)
-      puts ('=' * 10) + "COMPUTER BOARD" + ('=' * 10)
-      puts @player_1.board.render
-      puts " "
-      puts ('=' * 10) + "PLAYER BOARD" + ('=' * 10)
-      puts @player_2.board.render(true)
+      render_boards
       @player_2.dead?
     end
       if @player_2.dead?
