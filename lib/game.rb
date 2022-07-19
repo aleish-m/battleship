@@ -12,6 +12,7 @@ class Game
     @computer_hit_coordinate = ""
   end
 
+
   def welcome
     puts "Welcome to BATTLESHIP\nEnter p to play. Enter q to quit."
     until @start == "p" || @start == "q" do
@@ -20,33 +21,24 @@ class Game
       next if @start == "p" || @start == "q"
       puts "Please select valid option 'p' or 'q'."
     end
-
   end
+
 
   def setup
     @player_1.place_ship(player_1.cruiser)
     @player_1.place_ship(player_1.submarine)
     puts "I have laid out my ships on the grid."
+    puts " "
     puts @player_2.board.render
     ask_for_placement(@player_2.cruiser)
-    puts @player_2.board.render(true)
+    puts " "
     ask_for_placement(@player_2.submarine)
-    puts @player_2.board.render(true)
   end
 
-  def render_boards
-    puts ('=' * 10) + "COMPUTER BOARD" + ('=' * 10)
-    puts @player_1.board.render
-    puts " "
-    puts ('=' * 10) + "PLAYER BOARD" + ('=' * 10)
-    puts @player_2.board.render(true)
-  end
 
   def play
     render_boards
-
     until player_1.dead? || player_2.dead?
-
       @player_1.board.cells[player_turn].fire_upon
       player_hit_message(@player_hit_coordinate)
       @player_1.dead?
@@ -56,21 +48,35 @@ class Game
       render_boards
       @player_2.dead?
     end
-      if @player_2.dead?
-        puts ('=' * 40)
-        puts "You lost"
-      else
-        puts ('=' * 40)
-        puts "You WON!!!"
-      end
+    results
+  end
+
+
+  def render_boards
+    puts ('=' * 10) + "COMPUTER BOARD" + ('=' * 10)
+    puts @player_1.board.render
+    puts " "
+    puts ('=' * 10) + "PLAYER BOARD" + ('=' * 10)
+    puts @player_2.board.render(true)
+    puts " "
+  end
+
+
+  def results
+    if @player_2.dead?
+      puts ('=' * 40)
+      puts "You Lost. :( \nBetter luck next time."
+    else
+      puts ('=' * 40)
+      puts "You WON!!!"
+    end
   end
 
 
   def ask_for_placement(boat)
     user_input = []
-    puts "Enter the squares for the #{boat.name} (#{boat.length} spaces.)
-    Squares must be entered sequentially. Ships can only be Horizontal or Vertical.
-    (Example Input: 'A1 A2 A3' or 'B2 C2 D2')"
+    puts "Enter the squares for the #{boat.name} (#{boat.length} spaces.) \nSquares must be entered sequentially. Ships can only be Horizontal or Vertical.
+      (Example Placement: 'A1 A2' or 'B2 C2 D2')"
     until @player_2.board.valid_placement?(boat, user_input) do
       print "> "
       user_input = gets.chomp.upcase.split(" ")
@@ -84,6 +90,7 @@ class Game
   def comp_valid_turn?(coordinate)
     @player_2.board.cells[coordinate].hit == false
   end
+
 
   def comp_turn
     coordinate = " "
@@ -122,7 +129,7 @@ class Game
 
   def player_hit_message(coordinate)
     if @player_1.board.cells[coordinate].render == "X"
-      puts "Your shot on #{coordinate} sunk my #{@player_1.board.cells[coordinate].ship.name}!!!!!!"
+      puts "Your shot on #{coordinate} sunk the Computer's #{@player_1.board.cells[coordinate].ship.name}!!!!!!"
     elsif @player_1.board.cells[coordinate].render == "H"
       puts "Your shot on #{coordinate} was a hit"
     elsif @player_1.board.cells[coordinate].render == "M"
