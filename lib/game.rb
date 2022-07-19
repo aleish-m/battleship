@@ -95,7 +95,7 @@ class Game
   def comp_turn
     coordinate = " "
     loop do
-      coordinate = @player_1.board.cells.keys.shuffle[0]
+      coordinate = @player_2.board.cells.keys.shuffle[0]
       if comp_valid_turn?(coordinate)
         break
       end
@@ -106,7 +106,7 @@ class Game
   end
 
   def player_valid_turn?(coordinate)
-    if @player_2.board.valid_coordinate?(coordinate)
+    if @player_1.board.valid_coordinate?(coordinate)
       @player_1.board.cells[coordinate].hit == false
     end
   end
