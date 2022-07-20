@@ -5,15 +5,15 @@ describe Computer do
     @player_1 = Computer.new
   end
 
-  it "has computer player that exists" do
+  it "Computer player exists" do
     expect(@player_1).to be_instance_of(Computer)
   end
 
-  it "has a board to play on" do
+  it "Computer player has a board to play on" do
     expect(@player_1.board).to be_instance_of(Board)
   end
 
-  it "Computer player is alive at start of game" do
+  it "Computer player's ships are alive at start of game" do
     expect(@player_1.dead?).to be(false)
   end
 
@@ -34,6 +34,5 @@ describe Computer do
     expect(@player_1.board.cells).to have_key(@player_1.place_ship(@player_1.cruiser)[1])
     expect(@player_1.board.cells).to have_key(@player_1.place_ship(@player_1.cruiser)[2])
   end
-
 
 end

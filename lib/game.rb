@@ -48,7 +48,7 @@ class Game
       render_boards
       @player_2.dead?
     end
-    results
+    puts results
   end
 
 
@@ -64,11 +64,11 @@ class Game
 
   def results
     if @player_2.dead?
-      puts ('=' * 40)
-      puts "You Lost. :( \nBetter luck next time."
+      puts '=' * 40
+      "You Lost. :( \nBetter luck next time."
     else
-      puts ('=' * 40)
-      puts "You WON!!!"
+      puts '=' * 40
+      "You WON!!!"
     end
   end
 
