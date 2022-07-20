@@ -9,12 +9,17 @@ describe Game do
     expect(@game).to be_instance_of(Game)
   end
 
-  it "check player_2 has valid placement" do
-    # expect(@game.ask_for_placement(@game.player_2.cruiser).to be(true)
-    # expect(@game.player_place_ship(@game.player_2.cruiser)).to be_a_kind_of(Array)
-    # expect(@game.player_2.board.cells).to have_key(@game.player_place_ship(@game.player_2.cruiser)[0])
-    # expect(@game.player_2.board.cells).to have_key(@game.player_place_ship(@game.player_2.cruiser)[1])
-    # expect(@game.player_2.board.cells).to have_key(@game.player_place_ship(@game.player_2.cruiser)[2])
+  it "game checks player_2 has valid turn" do
+    expect(@game.player_valid_turn?("A1")).to eq(true)
+    @game.player_1.board.cells["A1"].fire_upon
+    expect(@game.player_valid_turn?("A1")).to eq(false)
+    expect(@game.player_valid_turn?("A5")).to eq(false)
+  end
+
+  it "game checks player_1 has valid turn" do
+    expect(@game.comp_valid_turn?("A1")).to eq(true)
+    @game.player_2.board.cells["A1"].fire_upon
+    expect(@game.comp_valid_turn?("A1")).to eq(false)
   end
 
   it "Game provides end game results if player Loses" do
@@ -35,6 +40,29 @@ describe Game do
     @game.player_1.submarine.hit
     expect(@game.player_1.dead?).to be(true)
     expect(@game.results).to eq("You WON!!!")
+  end
+
+  it "has player hit feedback" do
+    @game.player_1.board.place(@game.player_1.cruiser,["A1", "A2", "A3"])
+    @game.player_1.board.cells["A1"].fire_upon
+    expect(@game.player_hit_message("A1")).to eq("Your shot on A1 was a hit")
+    @game.player_1.board.cells["A2"].fire_upon
+    @game.player_1.board.cells["A3"].fire_upon
+    expect(@game.player_hit_message("A3")).to eq("Your shot on A3 sunk the Computer's Cruiser!!!!!!")
+    @game.player_1.board.cells["B2"].fire_upon
+    expect(@game.player_hit_message("B2")).to eq("Your shot on B2 was a miss")
+  end
+
+  it "has computer hit feedback" do
+    @game.player_2.board.place(@game.player_2.cruiser,["A1", "A2", "A3"])
+    @game.player_2.board.cells["A1"].fire_upon
+    expect(@game.computer_hit_message("A1")).to eq("Computer shot on A1 was a hit")
+    @game.player_2.board.cells["A2"].fire_upon
+    @game.player_2.board.cells["A3"].fire_upon
+    expect(@game.computer_hit_message("A3")).to eq("Computer shot on A3 sunk your Cruiser!!!!!!!")
+    @game.player_2.board.cells["B2"].fire_upon
+    expect(@game.computer_hit_message("B2")).to eq("Computer shot on B2 was a miss")
+
   end
 
 end
