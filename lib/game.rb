@@ -40,11 +40,11 @@ class Game
     render_boards
     until player_1.dead? || player_2.dead?
       @player_1.board.cells[player_turn].fire_upon
-      player_hit_message(@player_hit_coordinate)
+      puts player_hit_message(@player_hit_coordinate)
       @player_1.dead?
 
       @player_2.board.cells[comp_turn].fire_upon
-      computer_hit_message(@computer_hit_coordinate)
+      puts computer_hit_message(@computer_hit_coordinate)
       render_boards
       @player_2.dead?
     end
@@ -106,9 +106,8 @@ class Game
   end
 
   def player_valid_turn?(coordinate)
-    if @player_1.board.valid_coordinate?(coordinate)
+      @player_1.board.valid_coordinate?(coordinate) &&
       @player_1.board.cells[coordinate].hit == false
-    end
   end
 
   def player_turn
@@ -129,21 +128,21 @@ class Game
 
   def player_hit_message(coordinate)
     if @player_1.board.cells[coordinate].render == "X"
-      puts "Your shot on #{coordinate} sunk the Computer's #{@player_1.board.cells[coordinate].ship.name}!!!!!!"
+      "Your shot on #{coordinate} sunk the Computer's #{@player_1.board.cells[coordinate].ship.name}!!!!!!"
     elsif @player_1.board.cells[coordinate].render == "H"
-      puts "Your shot on #{coordinate} was a hit"
+      "Your shot on #{coordinate} was a hit"
     elsif @player_1.board.cells[coordinate].render == "M"
-      puts "Your shot on #{coordinate} was a miss"
+      "Your shot on #{coordinate} was a miss"
     end
   end
 
   def computer_hit_message(coordinate)
     if @player_2.board.cells[coordinate].render == "X"
-      puts "Computer shot on #{coordinate} sunk your #{@player_2.board.cells[coordinate].ship.name}!!!!!!!"
+      "Computer shot on #{coordinate} sunk your #{@player_2.board.cells[coordinate].ship.name}!!!!!!!"
     elsif @player_2.board.cells[coordinate].render == "H"
-      puts "Computer shot on #{coordinate} was a hit"
+      "Computer shot on #{coordinate} was a hit"
     elsif @player_2.board.cells[coordinate].render == "M"
-      puts "Computer shot on #{coordinate} was a miss"
+      "Computer shot on #{coordinate} was a miss"
     end
   end
 
