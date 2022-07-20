@@ -17,7 +17,7 @@ class Game
     puts "Welcome to BATTLESHIP\nEnter p to play. Enter q to quit."
     until @start == "p" || @start == "q" do
       print "> "
-      @start = gets.chomp.downcase
+      @start = gets.chomp[0].downcase
       next if @start == "p" || @start == "q"
       puts "Please select valid option 'p' or 'q'."
     end

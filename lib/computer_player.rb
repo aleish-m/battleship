@@ -2,9 +2,8 @@ require './lib/board'
 
 class Computer
 
-  attr_reader :board,
-              :cruiser,
-              :submarine
+  attr_reader :board, :cruiser, :submarine
+
   def initialize
     @board = Board.new
     @cruiser = Ship.new("Cruiser", 3)
