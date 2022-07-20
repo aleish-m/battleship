@@ -14,7 +14,7 @@ describe Player do
     expect(@player_2.board).to be_instance_of(Board)
   end
 
-  it "Player has a different board then computer player" do
+  it "Player has a different board than computer player" do
     expect(@player_1.board).to be_instance_of(Board)
     expect(@player_2.board == @player_1.board).to be(false)
   end
