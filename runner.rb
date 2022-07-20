@@ -8,7 +8,7 @@ loop do
         game.setup
         game.play
         puts " "
-        puts "-" * 40
+        puts "=" * 40
         puts " "
       else
         puts "Goodbye."
